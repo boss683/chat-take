@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Rooms | GirlsSpace Mahama</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f7fe;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        .site-header {
+            background: linear-gradient(135deg, #e22b90, #c55a98);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: #ff6b8b;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ff4d73;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 107, 139, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #8a2be2;
+            border: 2px solid #8a2be2;
+        }
+        
+        .btn-outline:hover {
+            background-color: #a34b90;
+            color: white;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .chat {
+            text-align: center;
+        }
+        
+        .chat h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #5d1a9e;
+        }
+        
+        .chat > p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: #666;
+        }
+        
+        /* Grid Layout */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #0e5ae7;
+        }
+        
+        .card p {
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+        
+        .muted {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Footer */
+        .site-footer {
+            background-color: #861f4f;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .chat h1 {
+                font-size: 2rem;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav container">
+            <div class="brand">GirlsSpace</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="chat.html" class="active">Chat</a>
+                <a href="stories.html">Stories</a>
+                <a href="programs.html">Programs</a>
+                <a href="protection.html">Protection</a>
+                <a href="support.html">Support</a>
+                <a href="donate.html">Donate</a>
+                <a href="login.html" class="btn btn-primary">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="chat">
+            <h2 >Safe Chat Rooms</h2>
+            <p>Join moderated, secure chat rooms. Share experiences and support each other in a safe, empowering environment.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Confidence Corner</h3>
+                        <p>Build self-esteem and share confidence tips in a supportive community dedicated to personal growth.</p>
+                        <p class="muted">👥 245 online • Active</p>
+                        <a class="btn btn-primary" href="/confidengail.html">Join Chat</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Health & Wellness</h3>
+                        <p>Discuss health topics in a safe space with trained moderators and healthcare professionals.</p>
+                        <p class="muted">👥 89 online • Active</p>
+                        <a class="btn btn-primary" href="/heathwellness.html">Join Study</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="card-content">
+                        <h3>Dreams & Goals</h3>
+                        <p>Share aspirations and support each other in achieving personal and professional goals.</p>
+                        <p class="muted">Private • Secure</p>
+                        <a class="btn btn-outline" href="./derames.html">Request Access</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2025 GirlsSpace Mahama. All rights reserved.</p>
+    </footer>
+</body>
+</html>

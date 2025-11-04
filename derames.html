@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Business Success Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: white;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .intro h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .intro p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .stories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .story-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-content {
+            padding: 1.5rem;
+        }
+
+        .story-content h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .business-name {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .story-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .add-story-section {
+            background: white;
+            padding: 3rem 0;
+            border-radius: 15px;
+            margin: 3rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .add-story-section h2 {
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .advice-section {
+            background: linear-gradient(135deg, #3a0ca3, #7209b7);
+            color: white;
+            padding: 3rem 0;
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .advice-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .advice-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .advice-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .advice-card:hover {
+            transform: scale(1.05);
+        }
+
+        .advice-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .advice-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .resources {
+            background-color: white;
+            padding: 3rem 0;
+            border-radius: 15px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .resources h2 {
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .resource-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .resource-item {
+            flex: 1;
+            min-width: 250px;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .resource-item i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .resource-item:hover i {
+            color: white;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .success-message {
+            display: none;
+            background-color: var(--success);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    .butt{ 
+            border: black solid 3px;
+            background-color: #c9cbdb;
+            width: 80px;
+            height: 40px;
+            border-radius: 20px 15px 20px 0px;
+            text-align: center;
+            text-decoration:none;
+            margin-bottom: 10px;
+            box-shadow:cornflowerblue ;
+            color: #ffffff86;
+            font-size:23px;
+        }
+
+        .butt,a{        
+            text-decoration: none;
+
+        }
+    
+            
+
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <a href="./chat.html"></a>
+
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Student Business Success Stories</h1>
+            </div>
+            <p class="subtitle">Discover how students turned their ideas into successful businesses while still in school</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="intro">
+            <h2>From Classroom to Boardroom</h2>
+            <p>These inspiring students balanced their academic responsibilities with entrepreneurial ambitions, creating successful businesses that continue to thrive today.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">85%</span>
+                    <span class="stat-label">Still in business after graduation</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$2.3M</span>
+                    <span class="stat-label">Average annual revenue</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">64%</span>
+                    <span class="stat-label">Hired other students</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="stories">
+            <div class="story-card">
+                <div class="story-img" ><img src="/good .png" alt=""></div>
+                <div class="story-content">
+                    <h3>Sarah Johnson</h3>
+                    <span class="business-name">EcoPack Solutions</span>
+                    <p>While studying environmental science, Sarah noticed the excessive plastic waste on campus. She launched EcoPack, creating sustainable packaging from agricultural waste. Within two years, her company secured contracts with major campus vendors and expanded to three other universities.</p>
+                    <p><strong>Advice:</strong> "Start with a problem you're passionate about solving. The business aspect follows naturally when you genuinely care about your mission."</p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="story-img"> 
+                    <img src="/Untitled design.png"alt=""> 
+                </div>
+                <div class="story-content">
+                    <h3>Marcus Chen</h3>
+                    <span class="business-name">StudyStream App</span>
+                    <p>As a computer science major struggling with focus, Marcus developed StudyStream - an app that connects students for virtual study sessions. The app gained 50,000 users in its first year and now features AI-powered productivity tracking.</p>
+                    <p><strong>Advice:</strong> "Build something you need yourself. Your personal pain points can reveal business opportunities that resonate with others."</p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="story-img"> <img src="/jazeal.png" alt=""></div>
+                <div class="story-content">
+                    <h3>Jasmine Rodriguez</h3>
+                    <span class="business-name">Campus Connect</span>
+                    <p>Jasmine noticed international students struggling to adapt to campus life. She created Campus Connect, a platform that pairs international students with local mentors. The service now operates on 12 campuses and has helped over 5,000 students.</p>
+                    <p><strong>Advice:</strong> "Don't wait for the perfect idea. Start with what you have, learn from feedback, and iterate quickly. Progress beats perfection every time."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="add-story-section">
+            <h2>Share Your Success Story</h2>
+            <div class="form-container">
+                <form id="story-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="business">Business Name</label>
+                            <input type="text" id="business" name="business" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="university">University</label>
+                            <input type="text" id="university" name="university" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Business Category</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Technology">Technology</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Education">Education</option>
+                            <option value="Sustainability">Sustainability</option>
+                            <option value="Health & Wellness">Health & Wellness</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="story">Your Success Story</label>
+                        <textarea id="story" name="story" placeholder="Tell us about your business journey, challenges you faced, and what you've achieved..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="advice">Advice for Other Students</label>
+                        <textarea id="advice" name="advice" placeholder="What advice would you give to other student entrepreneurs?" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="website">Business Website (optional)</label>
+                        <input type="url" id="website" name="website" placeholder="https://">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Your Story</button>
+                    
+                    <div id="success-message" class="success-message">
+                        Thank you for sharing your story! We'll review it and may feature it on our website.
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="advice-section">
+            <h2>Essential Advice for Student Entrepreneurs</h2>
+            <div class="advice-cards">
+                <div class="advice-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Validate Your Idea</h3>
+                    <p>Test your concept with a small group before investing significant time and resources.</p>
+                </div>
+                <div class="advice-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Manage Time Wisely</h3>
+                    <p>Create a strict schedule that balances academic responsibilities with business development.</p>
+                </div>
+                <div class="advice-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Build Your Network</h3>
+                    <p>Leverage campus resources, professors, and fellow students for support and guidance.</p>
+                </div>
+                <div class="advice-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>Bootstrap When Possible</h3>
+                    <p>Start with minimal investment and reinvest profits to grow your business organically.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="resources">
+            <h2>Resources for Student Entrepreneurs</h2>
+            <div class="resource-list">
+                <div class="resource-item">
+                    <i class="fas fa-university"></i>
+                    <h3>Campus Incubators</h3>
+                    <p>Access to mentorship, workspace, and funding opportunities</p>
+                    <!-- <img src=".imge/scs.jpg" alt=""> -->
+                </div>
+                <div class="resource-item">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Business Competitions</h3>
+                    <p>Pitch your idea and win seed funding and recognition</p>
+                </div>
+                <div class="resource-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Alumni Networks</h3>
+                    <p>Connect with successful graduates for guidance and investment</p>
+                </div>
+            </div>
+        </section>
+          <div class="butt">
+<a href="index.html" > Home</a>
+
+    </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Student Business Success</h3>
+                    <p>Inspiring and supporting the next generation of entrepreneurs through real stories and practical advice.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@studentbusiness.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive success stories and entrepreneurial tips directly in your inbox.</p>
+                    <form>
+                        <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; margin-top: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" style="padding: 10px 20px; margin-top: 10px; background: var(--accent); color: white; border: none; border-radius: 5px; cursor: pointer;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Student Business Success Stories. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('story-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to a server here
+            // For this example, we'll just show a success message
+            
+            document.getElementById('success-message').style.display = 'block';
+            
+            // Reset the form
+            setTimeout(function() {
+                document.getElementById('story-form').reset();
+                document.getElementById('success-message').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

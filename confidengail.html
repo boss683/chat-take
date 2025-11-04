@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Business Chat Room</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #bababe;
+            --primary-light: #304dac;
+            --secondary: #5211e9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --warning: #f72585;
+            --gray: #adb5bd;
+            --gray-light: #e9ecef;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 30%;
+            background: var(--light);
+            border-right: 1px solid var(--gray-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            border: #4361ee solid 3px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .user-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .online-status {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            margin-right: 5px;
+        }
+
+        .channels {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .channels h3 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .channels h3 i {
+            margin-right: 10px;
+        }
+
+        .channel-list {
+            list-style: none;
+        }
+
+        .channel-item {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .channel-item:hover {
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .channel-item.active {
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .channel-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .channel-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+
+        .channel-info p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* Chat Area Styles */
+        .chat-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #1d2122;
+
+        }
+
+        .chat-title h2 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+        }
+
+        .chat-title p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .chat-actions button {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .chat-actions button:hover {
+            color: var(--primary);
+        }
+
+        .messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message {
+            display: flex;
+            max-width: 80%;
+        }
+
+        .message.received {
+            align-self: flex-start;
+        }
+
+        .message.sent {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 0 10px;
+            flex-shrink: 0;
+        }
+
+        .received .message-avatar {
+            background: var(--primary-light);
+        }
+
+        .sent .message-avatar {
+            background: var(--warning);
+        }
+
+        .message-content {
+            background: var(--gray-light);
+            padding: 12px 15px;
+            border-radius: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .received .message-content {
+            border-top-left-radius: 5px;
+            background: var(--light);
+        }
+
+        .sent .message-content {
+            border-top-right-radius: 5px;
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .received .message-sender {
+            color: var(--primary);
+        }
+
+        .sent .message-sender {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .message-text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            margin-top: 5px;
+            opacity: 0.7;
+            text-align: right;
+        }
+
+        .message-input {
+            padding: 20px;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-input input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 30px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        .message-input input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .send-button:hover {
+            background: var(--secondary);
+        }
+         .butt {
+            /* position: relative; */
+            border: rgb(10, 240, 48) solid 3px;
+            background-color: #8b8cd6;
+            width: 100px;
+            height: 40px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            margin-left: +50px;
+
+
+
+        }
+
+        .butt,
+        a {
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chat-container {
+                flex-direction: column;
+                height: 90vh;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 30%;
+            }
+            
+            .channels {
+                display: flex;
+                overflow-x: auto;
+                padding: 10px 20px;
+            }
+            
+            .channel-list {
+                display: flex;
+                gap: 10px;
+            }
+            
+            .channel-item {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+
+
+                <h2>Student Business Chat</h2>
+                <p>Connect with fellow entrepreneurs</p>
+            </div>
+            
+            <div class="user-profile">
+                <div class="user-avatar">MJ</div>
+                <div class="user-info">
+                    <h3>Maya Johnson</h3>
+                    <p>Founder of EcoPack</p>
+                    <div class="online-status">
+                        <div class="status-dot"></div>
+                        <span>Online</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="channels">
+                <h3><i class="fas fa-hashtag"></i> Discussion Channels</h3>
+                <ul class="channel-list">
+                    <li class="channel-item active">
+                        <div class="channel-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="channel-info">
+                            <h4>Ideas & Brainstorming</h4>
+                            <p>23 members</p>
+                        </div>
+                    </li>
+                    <li class="channel-item">
+                        <div class="channel-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="channel-info">
+                            <h4>Q&A Support</h4>
+                            <p>45 members</p>
+                        </div>
+                    </li>
+                    <li class="channel-item">
+                        <div class="channel-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="channel-info">
+                            <h4>Partnerships</h4>
+                            <p>18 members</p>
+                        </div>
+                    </li>
+                    <li class="channel-item">
+                        <div class="channel-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="channel-info">
+                            <h4>Growth Strategies</h4>
+                            <p>32 members</p>
+                        </div>
+                    </li>
+                    <li class="channel-item">
+                        <div class="channel-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="channel-info">
+                            <h4>Student Resources</h4>
+                            <p>56 members</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <h2>#ideas-and-brainstorming</h2>
+                    <p>Share and discuss business ideas with the community</p>
+
+
+
+                    
+    
+                </div>
+                <div class="chat-actions">
+                    <div class="butt">
+        <a href="/index.html"> Home</a>
+
+    </div>
+                    <button><i class="fas fa-search"></i></button>
+                    <button><i class="fas fa-phone"></i></button>
+                    <button><i class="fas fa-video"></i></button>
+                    <button><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+            
+            <div class="messages">
+                <div class="message received">
+                    <div class="message-avatar">AJ</div>
+                    <div class="message-content">
+                        <div class="message-sender">Alex Johnson</div>
+                        <div class="message-text">Hey everyone! I'm working on a sustainable packaging idea for campus food vendors. Any thoughts on materials that are both eco-friendly and cost-effective?</div>
+                        <div class="message-time">10:24 AM</div>
+                    </div>
+                </div>
+                
+                <div class="message sent">
+                    <div class="message-avatar">MJ</div>
+                    <div class="message-content">
+                        <div class="message-sender">You</div>
+                        <div class="message-text">That's a great idea, Alex! Have you considered using mushroom-based packaging? I've seen some startups having success with it.</div>
+                        <div class="message-time">10:26 AM</div>
+                    </div>
+                </div>
+                
+                <div class="message received">
+                    <div class="message-avatar">SK</div>
+                    <div class="message-content">
+                        <div class="message-sender">Samira Khan</div>
+                        <div class="message-text">Mushroom packaging is interesting but might be expensive for campus vendors. What about recycled paper with a biodegradable coating?</div>
+                        <div class="message-time">10:28 AM</div>
+                    </div>
+                </div>
+                
+                <div class="message received">
+                    <div class="message-avatar">TP</div>
+                    <div class="message-content">
+                        <div class="message-sender">Tyler Park</div>
+                        <div class="message-text">I agree with Samira. Also, you could approach the sustainability department for a grant or partnership. They might fund part of the initiative.</div>
+                        <div class="message-time">10:30 AM</div>
+                    </div>
+                </div>
+                
+                <div class="message sent">
+                    <div class="message-avatar">MJ</div>
+                    <div class="message-content">
+                        <div class="message-sender">You</div>
+                        <div class="message-text">Great point about the sustainability department! I can connect you with Dr. Evans if you'd like. She's always looking for student-led green initiatives.</div>
+                        <div class="message-time">10:32 AM</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="message-input">
+                <input type="text" placeholder="Type your message here...">
+                <button class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Simple chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageInput = document.querySelector('.message-input input');
+            const sendButton = document.querySelector('.send-button');
+            const messagesContainer = document.querySelector('.messages');
+            
+            // Function to add a new message
+            function addMessage(text) {
+                if (text.trim() === '') return;
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message sent';
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">MJ</div>
+                    <div class="message-content">
+                        <div class="message-sender">You</div>
+                        <div class="message-text">${text}</div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                `;
+                
+                messagesContainer.appendChild(messageDiv);
+                messageInput.value = '';
+                
+                // Scroll to the bottom
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+            
+            // Send message on button click
+            sendButton.addEventListener('click', function() {
+                addMessage(messageInput.value);
+            });
+            
+            // Send message on Enter key
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addMessage(messageInput.value);
+                }
+            });
+            
+            // Channel switching
+            const channelItems = document.querySelectorAll('.channel-item');
+            channelItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    channelItems.forEach(i => i.classList.remove('active'));
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // In a real app, you would load the channel messages here
+                    const channelName = this.querySelector('h4').textContent;
+                    document.querySelector('.chat-title h2').textContent = `#${channelName.toLowerCase().replace(/\s+/g, '-')}`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

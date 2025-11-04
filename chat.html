@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+
+
+   .navbar {
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 12px 40px;
+     background: #ffffff;
+     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+     position: sticky;
+     top: 0;
+     z-index: 1000;
+     flex-wrap: wrap;
+     gap: 20px;
+   }
+
+
+   .nav-logo img {
+     width: 80px;
+     height: 60px;
+     object-fit: contain;
+     border-radius: 60%;
+   }
+
+
+   .nav-links {
+     list-style: none;
+     display: flex;
+     gap: 24px;
+     align-items: center;
+     flex-wrap: wrap;
+   }
+
+
+   .nav-links a {
+     text-decoration: none;
+     font-size: 15px;
+     font-weight: 500;
+     color: #374151;
+     transition: 0.2s;
+   }
+
+
+   .nav-links a:hover {
+     color: #c23cb6;
+   }
+
+
+   /* Dropdown */
+   .dropdown {
+     position: relative;
+   }
+
+
+   .dropdown-menu {
+     position: absolute;
+     top: 100%;
+     left: 0;
+     background: white;
+     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+     border-radius: 10px;
+     list-style: none;
+     padding: 8px 0;
+     display: none;
+     min-width: 140px;
+     z-index: 1000;
+   }
+
+
+   .dropdown-menu li a {
+     display: block;
+     padding: 10px 16px;
+     color: #374151;
+     font-size: 14px;
+   }
+
+
+   .dropdown-menu li a:hover {
+     background: #f3e5f8;
+     color: #c23cb6;
+   }
+
+
+   .dropdown:hover .dropdown-menu {
+     display: block;
+   }
+
+
+   /* Buttons */
+   .login-btn {
+     padding: 8px 16px;
+     border: 1.5px solid #c23cb6;
+     border-radius: 30px;
+     font-weight: 600;
+     color: #ffffff;
+     text-decoration: none;
+     transition: 0.2s;
+   }
+
+
+   .login-btn:hover {
+     background: #fbe7ff;
+     color: #b02ca1;
+   }
+
+
+   .donate-btn {
+     padding: 10px 18px;
+     background: linear-gradient(90deg, #ff5f8d, #c23cb6);
+     color: rgb(255, 255, 255);
+     border-radius: 30px;
+     font-weight: 600;
+     text-decoration: none;
+   }
+
+
+   .donate-btn:hover {
+     border: 0 10px 10px solid #b02ca1;
+   }
+
+
+   /* Search */
+   .nav-search input {
+     padding: 8px 12px;
+     border-radius: 10px;
+     border: 1px solid #ddd;
+     outline: none;
+     font-size: 14px;
+     width: 160px;
+   }
+
+
+
+
+</style>
+<nav class="navbar">
+   <div class="nav-logo">
+     <img src="./img/Girls Space (1) (1).png" alt="GirlsSpace Logo">
+   </div>
+
+
+   <ul class="nav-links">
+     <li><a href="#">Home</a></li>
+     <li><a href="#">About</a></li>
+     <li><a href="#">Chat</a></li>
+     <li><a href="#">Stories</a></li>
+     <li><a href="#">Programs</a></li>
+     <li><a href="#">Support</a></li>
+
+
+     <!-- Language Dropdown -->
+     <li class="dropdown">
+       <a href="#">Languages</a>
+       <ul class="dropdown-menu">
+         <li><a href="#">English</a></li>
+         <li><a href="#">Arabic</a></li>
+         <li><a href="#">Swahili</a></li>
+         <li><a href="#">French</a></li>
+       </ul>
+     </li>
+     <li><a href="#" class="login-btn">Log In</a></li>
+     <li><a href="#" class="donate-btn">Donate</a></li>
+   </ul>
+
+
+   <div class="nav-search">
+     <input type="text" placeholder="Search...">
+   </div>
+ </nav>
+
+
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+    
+</body>
+<script src="./chat.js"> 
+
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlsSpace - Empowering Girls Worldwide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f7fd;
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo img {
+            width: 80px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 60%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: #374151;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #c23cb6;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            list-style: none;
+            padding: 8px 0;
+            display: none;
+            min-width: 140px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 16px;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #f3e5f8;
+            color: #c23cb6;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Buttons */
+        .login-btn {
+            padding: 8px 16px;
+            border: 1.5px solid #c23cb6;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #c23cb6;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #fbe7ff;
+            color: #b02ca1;
+        }
+
+        .donate-btn {
+            padding: 10px 18px;
+            background: linear-gradient(90deg, #ff5f8d, #c23cb6);
+            color: rgb(255, 255, 255);
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(194, 60, 182, 0.3);
+        }
+
+        /* Search */
+        .nav-search {
+            position: relative;
+        }
+
+        .nav-search input {
+            padding: 8px 12px 8px 36px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            outline: none;
+            font-size: 14px;
+            width: 160px;
+            transition: border-color 0.2s;
+        }
+
+        .nav-search input:focus {
+            border-color: #c23cb6;
+        }
+
+        .nav-search::before {
+            content: "🔍";
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: #374151;
+            margin-bottom: 4px;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+            
+            .nav-links {
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 20px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                display: none;
+            }
+            
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            
+            .nav-search {
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .nav-search input {
+                width: 100%;
+            }
+        }
+
+        /* Hero section for demo purposes */
+        .hero {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fce4ec, #e1bee7);
+            color: #374151;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="./img/Girls Space (1) (1).png" alt="GirlsSpace Logo">
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Chat</a></li>
+            <li><a href="#">Stories</a></li>
+            <li><a href="#">Programs</a></li>
+            <li><a href="#">Support</a></li>
+
+            <!-- Language Dropdown -->
+            <li class="dropdown" id="language-dropdown">
+                <a href="#">Languages</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">Arabic</a></li>
+                    <li><a href="#">Swahili</a></li>
+                    <li><a href="#">French</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="login-btn">Log In</a></li>
+            <li><a href="#" class="donate-btn">Donate</a></li>
+        </ul>
+
+        <div class="nav-search">
+            <input type="text" placeholder="Search...">
+        </div>
+    </nav>
+
+    <!-- Demo hero section -->
+    <section class="hero">
+        <div>
+            <h1>Welcome to GirlsSpace</h1>
+            <p>Empowering girls through education, community, and support</p>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const languageDropdown = document.getElementById('language-dropdown');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        if (window.innerWidth <= 768) {
+            languageDropdown.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.toggle('active');
+            });
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.navbar')) {
+                navLinks.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

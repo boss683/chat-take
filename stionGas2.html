@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribution Receipt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .receipt-container {
+            width: 100%;
+            max-width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .receipt-header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .receipt-header h1 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .receipt-header p {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+        
+        .receipt-body {
+            padding: 15px;
+        }
+        
+        .receipt-section {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .receipt-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        
+        .receipt-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .receipt-line .label {
+            color: #666;
+        }
+        
+        .receipt-line .value {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .user-info {
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .user-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2575fc;
+        }
+        
+        .user-id {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .distribution-type {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e9f7ef;
+            color: #27ae60;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .barcode {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .barcode-line {
+            height: 2px;
+            background: #333;
+            margin: 2px 0;
+        }
+        
+        .barcode-numbers {
+            font-family: monospace;
+            letter-spacing: 5px;
+            margin-top: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .receipt-footer {
+            text-align: center;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        .thank-you {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2575fc;
+        }
+        
+        .print-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .receipt-container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+            
+            .print-btn {
+                display: none;
+            }
+        }
+        
+        .status-completed {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .receipt-divider {
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 5px,
+                #ddd 5px,
+                #ddd 10px
+            );
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <div class="receipt-header">
+            <h1>DISTRIBUTION RECEIPT</h1>
+            <p>Automated Distribution System</p>
+        </div>
+        
+        <div class="receipt-body">
+            <div class="user-info">
+                <div class="user-name" id="user-name">John Smith</div>
+                <div class="user-id" id="user-id">ID: 12345</div>
+                <div class="distribution-type" id="distribution-type">FOOD</div>
+            </div>
+            
+            <div class="receipt-divider"></div>
+            
+            <div class="receipt-section">
+                <div class="section-title">Distribution Details</div>
+                <div class="receipt-line">
+                    <span class="label">Date:</span>
+                    <span class="value" id="receipt-date">Oct 16, 2023</span>
+                </div>
+                <div class="receipt-line">
+                    <span class="label">Time:</span>
+                    <span class="value" id="receipt-time">10:30 AM</span>
+                </div>
+                <div class="receipt-line">
+                    <span class="label">Location:</span>
+                    <span class="value" id="receipt-location">House 12</span>
+                </div>
+                <div class="receipt-line">
+                    <span class="label">Status:</span>
+                    <span class="value status-completed" id="receipt-status">COMPLETED</span>
+                </div>
+            </div>
+            
+            <div class="receipt-section">
+                <div class="section-title">Next Distribution</div>
+                <div class="receipt-line">
+                    <span class="label">Date:</span>
+                    <span class="value" id="next-date">Oct 23, 2023</span>
+                </div>
+                <div class="receipt-line">
+                    <span class="label">Time:</span>
+                    <span class="value" id="next-time">09:00 AM</span>
+                </div>
+                <div class="receipt-line">
+                    <span class="label">Location:</span>
+                    <span class="value" id="next-location">House 15</span>
+                </div>
+            </div>
+            
+            <div class="barcode">
+                <div class="barcode-line" style="width: 80%"></div>
+                <div class="barcode-line" style="width: 60%"></div>
+                <div class="barcode-line" style="width: 90%"></div>
+                <div class="barcode-line" style="width: 40%"></div>
+                <div class="barcode-line" style="width: 70%"></div>
+                <div class="barcode-numbers">12345 67890 12345</div>
+            </div>
+        </div>
+        
+        <div class="receipt-footer">
+            <div class="thank-you">Thank you for using our service!</div>
+            <div>Keep this receipt for your records</div>
+            <div>Contact: support@distributionsystem.com</div>
+        </div>
+        
+        <button class="print-btn" onclick="window.print()">Print Receipt</button>
+    </div>
+
+    <script>
+        // Function to update receipt with current data
+        function updateReceipt() {
+            const now = new Date();
+            
+            // Format current date
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            document.getElementById('receipt-date').textContent = now.toLocaleDateString('en-US', options);
+            
+            // Format current time
+            document.getElementById('receipt-time').textContent = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            
+            // Calculate next distribution date (7 days from now)
+            const nextDate = new Date(now);
+            nextDate.setDate(nextDate.getDate() + 7);
+            document.getElementById('next-date').textContent = nextDate.toLocaleDateString('en-US', options);
+            
+            // Simulate different users and distribution types
+            const users = [
+                { name: "John Smith", id: "12345", type: "FOOD", house: "12" },
+                { name: "Maria Garcia", id: "12346", type: "MEDICINE", house: "12" },
+                { name: "David Johnson", id: "12347", type: "FOOD", house: "15" },
+                { name: "Sarah Williams", id: "12348", type: "CLOTHING", house: "15" }
+            ];
+            
+            const randomUser = users[Math.floor(Math.random() * users.length)];
+            
+            document.getElementById('user-name').textContent = randomUser.name;
+            document.getElementById('user-id').textContent = `ID: ${randomUser.id}`;
+            document.getElementById('distribution-type').textContent = randomUser.type;
+            document.getElementById('receipt-location').textContent = `House ${randomUser.house}`;
+            document.getElementById('next-location').textContent = `House ${parseInt(randomUser.house) + 3}`;
+        }
+        
+        // Update receipt when page loads
+        updateReceipt();
+        
+        // Auto-update receipt every 10 seconds (simulating new users)
+        setInterval(updateReceipt, 10000);
+    </script>
+</body>
+</html>

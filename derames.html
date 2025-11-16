@@ -6,6 +6,10 @@
     <title>Student Business Success Stories</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+
+         .one{
+            height: 190px;
+        } 
         * {
             margin: 0;
             padding: 0;
@@ -14,19 +18,278 @@
         }
 
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
+            --primary: #7c2248;
+            --secondary: #b31f0b;
+            --accent: #cc7256;
+            --light: #948c8c;
+            --dark: #8a0d0d;
             --success: #4bb543;
         }
 
         body {
-            background-color: #f5f7ff;
+            /* background-color: #06070c; */
             color: var(--dark);
             line-height: 1.6;
         }
+
+   *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #7c7b7b;
+      color: rgb(0, 0, 0);
+    }
+
+    a, button {
+      cursor: pointer;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* ____ navbar ____ */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #d8d5d57e;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-logo img {
+      width: 60px;
+      height: 50px;
+      object-fit: contain;
+      border-radius: 50%;
+      
+    }
+
+    /* ____ hamburger ____ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background: #374151;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* ____ nav links ____ */
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-link {
+      position: relative;
+      color: #374151;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #ec4899;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 50%;
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      padding: 6px 14px;
+      border: 1.5px solid #c23cb6;
+      border-radius: 30px;
+      color: #c23cb6;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .login-btn:hover {
+      background: #fbe7ff;
+    }
+
+    .donate-btn {
+      padding: 8px 16px;
+      background: linear-gradient(90deg, #ff5f8d, #c23cb6);
+      color: white;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .donate-btn:hover {
+      border: 1px solid #c23cb6;
+      box-shadow: 0 1px 10px 3px #c23cb6;
+    }
+
+    .nav-search input {
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 13px;
+      width: 130px;
+    }
+
+    /* ____ Dropdown ____ */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      min-width: 130px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 8px 14px;
+      color: #374151;
+      font-size: 13px;
+    }
+
+    .dropdown-menu li a:hover {
+      background: #f3e5f8;
+      color: #c23cb6;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* ____ Overlay ____ */
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 999;
+    }
+
+    .nav-overlay.active {
+      display: block;
+    }
+
+    /* _____ Responsive _______ */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        gap: 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        transition: left 0.4s ease;
+        z-index: 1000;
+        overflow-y: auto;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-link, .login-btn, .donate-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        color: #374151;
+        font-size: 16px;
+      }
+
+      .nav-search {
+        order: 3;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .nav-search input {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .navbar {
+        padding: 12px 40px;
+      }
+
+      .nav-search input {
+        width: 160px;
+      }
+    }
+
+
+
+
+
+
+
+
+        /* last naverd */
 
         .container {
             width: 90%;
@@ -38,6 +301,11 @@
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+    /* body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: white;
+    } */
             padding: 2rem 0;
             text-align: center;
             border-radius: 0 0 20px 20px;
@@ -398,7 +666,7 @@
         }
     .butt{ 
             border: black solid 3px;
-            background-color: #c9cbdb;
+            background-color: #7a2010;
             width: 80px;
             height: 40px;
             border-radius: 20px 15px 20px 0px;
@@ -406,7 +674,7 @@
             text-decoration:none;
             margin-bottom: 10px;
             box-shadow:cornflowerblue ;
-            color: #ffffff86;
+            color: #ebe2e286;
             font-size:23px;
         }
 
@@ -443,20 +711,69 @@
     </style>
 </head>
 <body>
-    <header>
-    <a href="./chat.html"></a>
+<!-- navber -->
 
-        <div class="container">
+      <nav class="navbar">
+        <div class="nav-logo">
+            <img src="./imge/Girls Space (1) (1) (2).png" alt="GirlsSpace Logo">
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="./chat.html">Chat</a></li>
+            <li><a href="#">Stories</a></li>
+            <li><a href="#">Programs</a></li>
+            <li><a href="#">Support</a></li>
+
+            <!-- Language Dropdown -->
+            <li class="dropdown" id="language-dropdown">
+                <a href="#">Languages</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">Arabic</a></li>
+                    <li><a href="#">Swahili</a></li>
+                    <li><a href="#">French</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="login-btn">Log In</a></li>
+            <li><a href="#" class="donate-btn">Donate</a></li>
+        </ul>
+
+        <div class="nav-search">
+            <input type="text" placeholder="Search...">
+        </div>
+     </nav>
+
+
+
+
+
+
+
+
+
+
+     <header class="one">
+         <a href="./chat.html"></a>
+
+         <div class="container">
             <div class="logo">
                 <i class="fas fa-graduation-cap"></i>
-                <h1>Student Business Success Stories</h1>
+                <h1> Success Stories</h1>
             </div>
             <p class="subtitle">Discover how students turned their ideas into successful businesses while still in school</p>
-        </div>
-    </header>
+         </div>
+         </header>
 
-    <div class="container">
-        <section class="intro">
+         <div class="container">
+         <section class="intro">
             <h2>From Classroom to Boardroom .</h2>
             <p>These inspiring students balanced their academic responsibilities with entrepreneurial ambitions, creating successful businesses that continue to thrive today.</p>
             
@@ -465,6 +782,7 @@
                     <span class="stat-number">85%</span>
                     <span class="stat-label">Still in business after graduation</span>
                 </div>
+    
                 <div class="stat-item">
                     <span class="stat-number">$2.3M</span>
                     <span class="stat-label">Average annual revenue</span>
@@ -474,9 +792,9 @@
                     <span class="stat-label">Hired other students</span>
                 </div>
             </div>
-        </section>
+         </section>
 
-        <section class="stories">
+         <section class="stories">
             <div class="story-card">
                 <div class="story-img" ><img src="/good .png" alt=""></div>
                 <div class="story-content">
@@ -508,9 +826,9 @@
                     <p><strong>Advice:</strong> "Don't wait for the perfect idea. Start with what you have, learn from feedback, and iterate quickly. Progress beats perfection every time."</p>
                 </div>
             </div>
-        </section>
+         </section>
 
-        <section class="add-story-section">
+         <section class="add-story-section">
             <h2>Share Your Success Story</h2>
             <div class="form-container">
                 <form id="story-form">
@@ -520,7 +838,7 @@
                             <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="business">Business Name</label>
+                            <label for="business"> type of story Name</label>
                             <input type="text" id="business" name="business" required>
                         </div>
                     </div>
@@ -556,7 +874,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="advice">Advice for Other Students</label>
+                        <label for="advice">Advice for Other galrs</label>
                         <textarea id="advice" name="advice" placeholder="What advice would you give to other student entrepreneurs?" required></textarea>
                     </div>
                     
@@ -565,16 +883,16 @@
                         <input type="url" id="website" name="website" placeholder="https://">
                     </div>
                     
-                    <button type="submit" class="submit-btn">Submit Your Story</button>
+                    <button type="submit" class="submit-btn"> Submit Your Story </button>
                     
                     <div id="success-message" class="success-message">
                         Thank you for sharing your story! We'll review it and may feature it on our website.
                     </div>
                 </form>
             </div>
-        </section>
+         </section>
 
-        <section class="advice-section">
+         <section class="advice-section">
             <h2>Essential Advice for Student Entrepreneurs</h2>
             <div class="advice-cards">
                 <div class="advice-card">
@@ -598,9 +916,9 @@
                     <p>Start with minimal investment and reinvest profits to grow your business organically.</p>
                 </div>
             </div>
-        </section>
+         </section>
 
-        <section class="resources">
+         <section class="resources">
             <h2>Resources for Student Entrepreneurs</h2>
             <div class="resource-list">
                 <div class="resource-item">
@@ -622,7 +940,7 @@
             </div>
         </section>
           <div class="butt">
-<a href="index.html" > Home</a>
+<a href="chat.html" > Home</a>
 
     </div>
     </div>
@@ -636,8 +954,8 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contact Us</h3>
-                    <p>Email: info@studentbusiness.com</p>
-                    <p>Phone: (123) 456-7890</p>
+                    <p>Email: adamhusseinhussein27@gmail.com</p>
+                    <p>Phone: + 256 735 668 997 </p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -655,7 +973,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Student Business Success Stories. All rights reserved.</p>
+                <p>&copy; 2025 Student Business Success Stories. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -678,60 +996,8 @@
     </script>
 
 
-<!-- footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <!-- about -->
-        <div class="footer-about">
-          <div class="logo-section">
-            <img src="./img/Girls Space (1) (1).png" alt="Logo">
-            <p class="logo-subtitle">Empowering Girls, Building Futures</p>
-          </div>
-          <p class="about-text">
-            A safe digital haven where girls in Mahama refugee camp can connect, learn, grow, and thrive.
-          </p>
-          <div class="social-links">
-            <a href="#" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" class="social-btn"><i class="fa-brands fa-square-twitter"></i></a>
-            <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-btn"><i class="fa-brands fa-square-youtube"></i></a>
-          </div>
-        </div>
 
-        <!-- quick links -->
-        <div>
-          <h4 class="links-title">Quick Links</h4>
-          <ul class="links-list">
-            <li class="link-item"><a href="#">join Chat</a></li>
-            <li class="link-item"><a href="#">Shaer Story</a></li>
-            <li class="link-item"><a href="#">Peograms</a></li>
-          </ul>
-        </div>
-
-        <!-- get help -->
-        <div>
-          <h4 class="links-title">Get Help</h4>
-          <ul class="links-list">
-            <li class="link-item"><a href="#">Emergency</a></li>
-            <li class="link-item"><a href="#">Support</a></li>
-            <li class="link-item"><a href="#">Report</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- footer bottom -->
-      <div class="footer-bottom">
-        <p>© 2024 GirlsSpace Mahama. <span style="color:#d1d5db;">Empowering girls, always.</span></p>
-        <div class="footer-info">
-          <p>Available in: English, Français, Kiswahili, Kinyarwanda, Arabic</p>
-          <p>Supported by UNHCR, Save The Children, Alight</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
+     
 
 </body>
 </html>

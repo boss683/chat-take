@@ -15,11 +15,12 @@
 
         :root {
             --primary: #a5242449;
-            --primary-light:#66153ead;
-            --secondary: #119ae9bb;
+            --primary-light:#0e4a99cb;
+            /* --secondary:linear-gradient(135deg, #ec4899 0%, #be185d 100%); */
+            --secondary: #5211e9;
             --accent: #df9c0a9c;
             --light: #8d4545dc;
-            --dark: #050505fd;
+            --dark: #020202f6;
             --success: #28971e;
             --warning: #071a42;
             --gray: #000000de;
@@ -211,6 +212,12 @@
         .nav-overlay.active {
             display: block;
         }
+
+
+
+
+
+
 
         /* Main Content */
         .main-content {
@@ -570,6 +577,20 @@
             background: var(--secondary);
         }
 
+        /* Media message styles */
+        .media-message {
+            margin-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 250px;
+        }
+
+        .media-message img, .media-message video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         /* Search Modal */
         .search-modal {
             display: none;
@@ -654,6 +675,86 @@
             padding: 20px;
             color: var(--gray);
         }
+
+        /* Active Users Sidebar */
+        .active-users-sidebar {
+            width: 250px;
+            background: #f8f9fa;
+            border-left: 1px solid var(--gray-light);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .active-users-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .active-users-header h3 {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        .active-users-list {
+            list-style: none;
+        }
+
+        .active-user {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .active-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+
+        .active-user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .active-user-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .active-user-info p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* Media attachment buttons */
+        .media-attachments {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .media-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .media-btn:hover {
+            color: var(--primary);
+        }
+
+
+
+
 
         /* Main Footer (outside chat) */
         .main-footer {
@@ -895,6 +996,10 @@
                 min-width: 150px;
             }
 
+            .active-users-sidebar {
+                display: none;
+            }
+
             .footer-grid {
                 grid-template-columns: 1fr;
             }
@@ -952,7 +1057,11 @@
             <li><a href="#" class="login-btn">Login</a></li>
             <li><a href="#" class="donate-btn">Donate</a></li>
             <li class="nav-search">
+                <i class="fas fa-search"></i>
                 <input type="text" placeholder="Search...">
+            </li>
+            <li>
+                <a href="#" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
             </li>
         </ul>
         
@@ -990,9 +1099,11 @@
                             <div class="channel-icon">
                                 <i class="fas fa-lightbulb"></i>
                             </div>
-                            <div class="channel-info">
+                            <div class="channel-info">  
+                                <a href=""> 
                                 <h4>Ideas & Brainstorming</h4>
                                 <p>23 members</p>
+                                </a>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="support">
@@ -1000,8 +1111,10 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="channel-info">
+                                 <a href="./Support .html">
                                 <h4>Q&A Support</h4>
                                 <p>45 members</p>
+                                </a>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="partnerships">
@@ -1009,8 +1122,10 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <div class="channel-info">
+                                 <a href="/Partnerships.html">
                                 <h4>Partnerships</h4>
                                 <p>18 members</p>
+                                 </a>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="growth">
@@ -1018,8 +1133,11 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="channel-info">
+
+                                 <a href="./Growth .html">
                                 <h4>Growth Strategies</h4>
                                 <p>32 members</p>
+                                </a>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="resources">
@@ -1027,8 +1145,10 @@
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div class="channel-info">
+                                <a href="./studenresouse.html">
                                 <h4>Student Resources</h4>
                                 <p>56 members</p>
+                                </a>
                             </div>
                         </li>
                     </ul>
@@ -1045,6 +1165,7 @@
                     <div class="chat-actions">
                         <a href="/index.html" class="home-btn">Home</a>
                         <button id="search-btn"><i class="fas fa-search"></i></button>
+                        <button id="settings-btn"><i class="fas fa-cog"></i></button>
                         <button><i class="fas fa-ellipsis-v"></i></button>
                     </div>
                 </div>
@@ -1055,10 +1176,69 @@
                 
                 <div class="message-input">
                     <input type="text" id="message-input" placeholder="Type your message here...">
+                    <div class="media-attachments">
+                        <button class="media-btn" id="photo-btn"><i class="fas fa-image"></i></button>
+                        <button class="media-btn" id="video-btn"><i class="fas fa-video"></i></button>
+                        <button class="media-btn" id="file-btn"><i class="fas fa-paperclip"></i></button>
+                    </div>
                     <button class="send-button" id="send-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
+            </div>
+            
+            <!-- Active Users Sidebar -->
+            <div class="active-users-sidebar">
+                <div class="active-users-header">
+                    <h3>Active Users (12)</h3>
+                </div>
+                <ul class="active-users-list">
+                    <li class="active-user">
+                        <div class="active-user-avatar">
+                            <img src="imge/good .png" alt="User Avatar">
+                        </div>
+                        <div class="active-user-info">
+                            <h4>Alex Johnson</h4>
+                            <p>Online</p>
+                        </div>
+                    </li>
+                    <li class="active-user">
+                        <div class="active-user-avatar">
+                            <img src="imge/jazeal.png" alt="User Avatar">
+                        </div>
+                        <div class="active-user-info">
+                            <h4>Samira Khan</h4>
+                            <p>Online</p>
+                        </div>
+                    </li>
+                    <li class="active-user">
+                        <div class="active-user-avatar">
+                            <img src="imge/JS image (2).png" alt="User Avatar">
+                        </div>
+                        <div class="active-user-info">
+                            <h4>Tyler Park</h4>
+                            <p>Online</p>
+                        </div>
+                    </li>
+                    <li class="active-user">
+                        <div class="active-user-avatar">
+                            <img src="imge/girl.png" alt="User Avatar">
+                        </div>
+                        <div class="active-user-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Away</p>
+                        </div>
+                    </li>
+                    <li class="active-user">
+                        <div class="active-user-avatar">
+                            <img src="imge/hussein.png" alt="User Avatar">
+                        </div>
+                        <div class="active-user-info">
+                            <h4>David Chen</h4>
+                            <p>Online</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -1194,6 +1374,13 @@
                     text: "If you're looking for something more tech-focused, Y Combinator has great resources online for startup founders.",
                     time: "09:30 AM",
                     type: "received"
+                },
+                {
+                    sender: "You",
+                    avatar: "imge/Pasted image.png",
+                    text: "Thanks everyone! These are all great suggestions. I'll check out the SBA website first and then look into the university workshops.",
+                    time: "09:35 AM",
+                    type: "sent"
                 }
             ],
             partnerships: [
@@ -1217,6 +1404,13 @@
                     text: "Our student marketing club is always looking for real projects. We could potentially help with your marketing campaign.",
                     time: "11:15 AM",
                     type: "received"
+                },
+                {
+                    sender: "You",
+                    avatar: "imge/Pasted image.png",
+                    text: "That sounds perfect! I'd love to connect with both of you. Should we schedule a meeting next week?",
+                    time: "11:20 AM",
+                    type: "sent"
                 }
             ],
             growth: [
@@ -1240,6 +1434,13 @@
                     text: "Partnering with local schools could be another avenue. Many schools are looking for after-school tutoring programs.",
                     time: "02:20 PM",
                     type: "received"
+                },
+                {
+                    sender: "You",
+                    avatar: "imge/Pasted image.png",
+                    text: "Both great ideas! I've also found that referral programs work well - offer existing clients a discount for referring new students.",
+                    time: "02:25 PM",
+                    type: "sent"
                 }
             ],
             resources: [
@@ -1263,6 +1464,13 @@
                     text: "The business library also has a dedicated section for entrepreneurship with some really helpful books and resources.",
                     time: "03:55 PM",
                     type: "received"
+                },
+                {
+                    sender: "You",
+                    avatar: "imge/Pasted image.png",
+                    text: "And don't forget about the mentorship program through the entrepreneurship center. They match students with experienced business mentors.",
+                    time: "04:00 PM",
+                    type: "sent"
                 }
             ]
         };
@@ -1449,6 +1657,25 @@
                     addMessage(messageInput.value);
                 }
             });
+
+            // Media attachment buttons
+            const photoBtn = document.getElementById('photo-btn');
+            const videoBtn = document.getElementById('video-btn');
+            const fileBtn = document.getElementById('file-btn');
+            
+            photoBtn.addEventListener('click', function() {
+                alert("In a real app, this would open a file picker to select a photo");
+                // Example of how to add a media message
+                // addMediaMessage('photo', 'path/to/photo.jpg');
+            });
+            
+            videoBtn.addEventListener('click', function() {
+                alert("In a real app, this would open a file picker to select a video");
+            });
+            
+            fileBtn.addEventListener('click', function() {
+                alert("In a real app, this would open a file picker to select any file");
+            });
         });
 
         // Function to load a channel
@@ -1502,6 +1729,47 @@
             };
             
             return channelNames[channelId] || channelId;
+        }
+
+        // Function to add a media message (for future implementation)
+        function addMediaMessage(type, url) {
+            const messagesContainer = document.getElementById('messages-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message sent';
+            
+            let mediaHtml = '';
+            if (type === 'photo') {
+                mediaHtml = `<div class="media-message"><img src="${url}" alt="Shared photo"></div>`;
+            } else if (type === 'video') {
+                mediaHtml = `<div class="media-message"><video controls><source src="${url}" type="video/mp4">Your browser does not support the video tag.</video></div>`;
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <img src="imge/Pasted image.png" alt="User Avatar">
+                </div>
+                <div class="message-content">
+                    <div class="message-sender">You</div>
+                    ${mediaHtml}
+                    <div class="message-time">Just now</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Add to allMessages for search functionality
+            const newMessage = {
+                sender: "You",
+                avatar: "imge/Pasted image.png",
+                text: `Shared a ${type}`,
+                time: "Just now",
+                type: "sent",
+                channel: currentChannel,
+                media: { type, url }
+            };
+            
+            allMessages.push(newMessage);
         }
     </script>
 </body>

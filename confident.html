@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Chat Room</title>
+    <title>Chat Room</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,10 +15,10 @@
 
         :root {
             --primary: #a5242449;
-            --primary-light:#66153ead;
+            --primary-light:#ec107ebb;
             --secondary: #119ae9bb;
             --accent: #df9c0a9c;
-            --light: #8d4545dc;
+            --light: #dd0e425d;
             --dark: #050505fd;
             --success: #28971e;
             --warning: #071a42;
@@ -308,13 +308,39 @@
             margin-right: 5px;
         }
 
-        .channels {
+        .sidebar-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .sidebar-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .sidebar-tab.active {
+            background: white;
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .channels, .people {
             padding: 20px;
             flex-grow: 1;
             overflow-y: auto;
+            display: none;
         }
 
-        .channels h3 {
+        .channels.active, .people.active {
+            display: block;
+        }
+
+        .channels h3, .people h3 {
             font-size: 1rem;
             margin-bottom: 15px;
             color: var(--secondary);
@@ -322,15 +348,15 @@
             align-items: center;
         }
 
-        .channels h3 i {
+        .channels h3 i, .people h3 i {
             margin-right: 10px;
         }
 
-        .channel-list {
+        .channel-list, .people-list {
             list-style: none;
         }
 
-        .channel-item {
+        .channel-item, .person-item {
             padding: 12px 15px;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -340,18 +366,18 @@
             align-items: center;
         }
 
-        .channel-item:hover {
+        .channel-item:hover, .person-item:hover {
             background: white;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .channel-item.active {
+        .channel-item.active, .person-item.active {
             background: white;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             border-left: 4px solid var(--primary);
         }
 
-        .channel-icon {
+        .channel-icon, .person-avatar {
             width: 35px;
             height: 35px;
             border-radius: 50%;
@@ -362,16 +388,55 @@
             color: white;
             margin-right: 10px;
             font-size: 0.9rem;
+            overflow: hidden;
         }
 
-        .channel-info h4 {
+        .person-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .channel-info, .person-info {
+            flex: 1;
+        }
+
+        .channel-info h4, .person-info h4 {
+        color: #000000;
             font-size: 0.95rem;
             margin-bottom: 3px;
         }
-
-        .channel-info p {
+        .person-info h4{
+            color: rgb(13, 13, 173);
+        }
+        .channel-info p, .person-info p {
             font-size: 0.75rem;
             color: var(--gray);
+        }
+
+        .person-status {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .person-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .person-status-dot.online {
+            background: var(--success);
+        }
+
+        .person-status-dot.offline {
+            background: var(--gray);
+        }
+
+        .person-status-dot.busy {
+            background: var(--warning);
         }
 
         /* Chat Area Styles */
@@ -877,21 +942,24 @@
             
             .sidebar {
                 width: 100%;
-                height: 3%;
+                height: 40%;
             }
             
-            .channels {
+            .channels, .people {
                 display: flex;
-                overflow-x: auto;
+                flex-direction: column;
+                overflow-x: hidden;
+                overflow-y: auto;
                 padding: 10px 20px;
             }
             
-            .channel-list {
+            .channel-list, .people-list {
                 display: flex;
+                flex-direction: column;
                 gap: 10px;
             }
             
-            .channel-item {
+            .channel-item, .person-item {
                 min-width: 150px;
             }
 
@@ -900,6 +968,75 @@
             }
         }
        
+        @media (max-width: 480px) {
+            .sidebar {
+                height: 35%;
+            }
+            
+            .sidebar-header {
+                padding: 15px;
+            }
+            
+            .sidebar-header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .user-profile {
+                padding: 10px 15px;
+            }
+            
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .user-info h3 {
+                font-size: 1rem;
+            }
+            
+            .channels, .people {
+                padding: 10px 15px;
+            }
+            
+            .channel-item, .person-item {
+                padding: 10px;
+            }
+            
+            .channel-icon, .person-avatar {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            
+            .channel-info h4, .person-info h4 {
+                font-size: 0.9rem;
+            }
+            
+            .chat-header {
+                padding: 15px;
+            }
+            
+            .chat-title h2 {
+                font-size: 1.1rem;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .message-avatar {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .message-content {
+                padding: 10px 12px;
+            }
+            
+            .message-text {
+                font-size: 0.9rem;
+            }
+        }
 
         @media (min-width: 769px) {
             .navbar {
@@ -921,7 +1058,7 @@
     <!-- Modern Navigation -->
     <nav class="navbar">
         <div class="nav-logo">
-            <img src="./imge/Girls Space (1) (1) (2).png" alt="Logo">
+            <img src="./img/Girls Space (1) (1) (2).png" alt="Logo">
         </div>
         
         <div class="hamburger">
@@ -971,7 +1108,7 @@
                 
                 <div class="user-profile">
                     <div class="user-avatar"> 
-                        <img src="imge/girl.png" alt="User Avatar">
+                        <img src="img/girl.png" alt="User Avatar">
                     </div>
                     <div class="user-info">
                         <h3>Maya Johnson</h3>
@@ -983,7 +1120,12 @@
                     </div>
                 </div>
                 
-                <div class="channels">
+                <div class="sidebar-tabs">
+                    <div class="sidebar-tab active" data-tab="channels">Channels</div>
+                    <div class="sidebar-tab" data-tab="people">People</div>
+                </div>
+                
+                <div class="channels active">
                     <h3><i class="fas fa-hashtag"></i> Discussion Channels</h3>
                     <ul class="channel-list">
                         <li class="channel-item active" data-channel="ideas">
@@ -1033,6 +1175,77 @@
                         </li>
                     </ul>
                 </div>
+                
+                <div class="people">
+                    <h3><i class="fas fa-users"></i> Community Members</h3>
+                    <ul class="people-list">
+                        <li class="person-item" data-person="alex">
+                            <div class="person-avatar">
+                                <img src="img/good .png" alt="Alex Johnson">
+                            </div>
+                            <div class="person-info">
+                                <h4>Alex Johnson</h4>
+                                <p>Product Designer</p>
+                                <div class="person-status">
+                                    <div class="person-status-dot online"></div>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="person-item" data-person="samira">
+                            <div class="person-avatar">
+                                <img src="/img/jazeal.png" alt="Samira Khan">
+                            </div>
+                            <div class="person-info">
+                                <h4>Samira Khan</h4>             
+                                <p>Marketing Specialist</p>
+                                <div class="person-status">
+                                    <div class="person-status-dot online"></div>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="person-item" data-person="tyler">
+                            <div class="person-avatar">
+                                <img src="img/JS image (2).png" alt="Tyler Park">
+                            </div>
+                            <div class="person-info">
+                                <h4 style="color: #071a42;">Tyler Park</h4>
+                                <p>Finance Advisor</p>
+                                <div class="person-status">
+                                    <div class="person-status-dot busy"></div>
+                                    <span>Busy</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="person-item" data-person="maria">
+                            <div class="person-avatar">
+                                <img src="img/jazeal.png" alt="Maria Rodriguez">
+                            </div>
+                            <div class="person-info">
+                                <h4>Maria Rodriguez</h4>
+                                <p>Software Developer</p>
+                                <div class="person-status">
+                                    <div class="person-status-dot offline"></div>
+                                    <span>Offline</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="person-item" data-person="david">
+                            <div class="person-avatar">
+                                <img src="img/JS image (2).png" alt="David Chen">
+                            </div>
+                            <div class="person-info">
+                                <h4>David Chen</h4>
+                                <p>UX Researcher</p>
+                                <div class="person-status">
+                                    <div class="person-status-dot online"></div>
+                                    <span>Online</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             
             <!-- Chat Area -->
@@ -1043,7 +1256,7 @@
                         <p id="channel-description">Share and discuss business ideas with the community</p>
                     </div>
                     <div class="chat-actions">
-                        <a href="/index.html" class="home-btn">Home</a>
+                        <!-- <a href="/index.html" class="home-btn">Home</a> -->
                         <button id="search-btn"><i class="fas fa-search"></i></button>
                         <button><i class="fas fa-ellipsis-v"></i></button>
                     </div>
@@ -1083,7 +1296,7 @@
             <div class="footer-grid">
                 <div class="footer-about">
                     <div class="logo-section">
-                        <img src="./imge/Girls Space (1) (1) (2).png" alt="Logo">
+                        <img src="./img/Girls Space (1) (1) (2).png" alt="Logo">
                         <p class="logo-subtitle">Empowering Students, Building Futures</p>
                     </div>
                     <p class="about-text">
@@ -1132,35 +1345,35 @@
             ideas: [
                 {
                     sender: "Alex Johnson",
-                    avatar: "imge/good .png",
+                    avatar: "img/good .png",
                     text: "Hey everyone! I'm working on a sustainable packaging idea for campus food vendors. Any thoughts on materials that are both eco-friendly and cost-effective?",
                     time: "10:24 AM",
                     type: "received"
                 },
                 {
                     sender: "You",
-                    avatar: "imge/hussein.png",
+                    avatar: "img/hussein.png",
                     text: "That's a great idea, Alex! Have you considered using mushroom-based packaging? I've seen some startups having success with it.",
                     time: "10:26 AM",
                     type: "sent"
                 },
                 {
                     sender: "Samira Khan",
-                    avatar: "imge/jazeal.png",
+                    avatar: "img/jazeal.png",
                     text: "Mushroom packaging is interesting but might be expensive for campus vendors. What about recycled paper with a biodegradable coating?",
                     time: "10:28 AM",
                     type: "received"
                 },
                 {
                     sender: "Tyler Park",
-                    avatar: "imge/JS image (2).png",
+                    avatar: "img/JS image (2).png",
                     text: "I agree with Samira. Also, you could approach the sustainability department for a grant or partnership. They might fund part of the initiative.",
                     time: "10:30 AM",
                     type: "received"
                 },
                 {
                     sender: "You",
-                    avatar: "imge/Pasted image.png",
+                    avatar: "img/Pasted image.png",
                     text: "Great point about the sustainability department! I can connect you with Dr. Evans if you'd like. She's always looking for student-led green initiatives.",
                     time: "10:32 AM",
                     type: "sent"
@@ -1169,28 +1382,28 @@
             support: [
                 {
                     sender: "Jamie Lee",
-                    avatar: "imge/good .png",
+                    avatar: "img/good .png",
                     text: "Hi everyone, I'm struggling with creating a business plan for my startup. Any resources or templates you'd recommend?",
                     time: "09:15 AM",
                     type: "received"
                 },
                 {
                     sender: "You",
-                    avatar: "imge/hussein.png",
+                    avatar: "img/hussein.png",
                     text: "I found the Small Business Administration website really helpful. They have free templates and guides for creating business plans.",
                     time: "09:20 AM",
                     type: "sent"
                 },
                 {
                     sender: "Maria Rodriguez",
-                    avatar: "imge/jazeal.png",
+                    avatar: "img/jazeal.png",
                     text: "The university's entrepreneurship center also offers free workshops on business planning. I attended one last month and it was fantastic!",
                     time: "09:25 AM",
                     type: "received"
                 },
                 {
                     sender: "David Chen",
-                    avatar: "imge/JS image (2).png",
+                    avatar: "img/JS image (2).png",
                     text: "If you're looking for something more tech-focused, Y Combinator has great resources online for startup founders.",
                     time: "09:30 AM",
                     type: "received"
@@ -1199,21 +1412,21 @@
             partnerships: [
                 {
                     sender: "Sarah Williams",
-                    avatar: "imge/good .png",
+                    avatar: "img/good .png",
                     text: "I'm looking for a marketing partner for my eco-friendly clothing line. Anyone interested in collaborating?",
                     time: "11:05 AM",
                     type: "received"
                 },
                 {
                     sender: "You",
-                    avatar: "imge/hussein.png",
+                    avatar: "img/hussein.png",
                     text: "I have experience in digital marketing and would love to discuss potential collaboration. Let's connect!",
                     time: "11:10 AM",
                     type: "sent"
                 },
                 {
                     sender: "Michael Brown",
-                    avatar: "imge/jazeal.png",
+                    avatar: "img/jazeal.png",
                     text: "Our student marketing club is always looking for real projects. We could potentially help with your marketing campaign.",
                     time: "11:15 AM",
                     type: "received"
@@ -1222,21 +1435,21 @@
             growth: [
                 {
                     sender: "Lisa Thompson",
-                    avatar: "imge/good .png",
+                    avatar: "img/good .png",
                     text: "My tutoring service has plateaued at 20 clients. Any suggestions for scaling up without compromising quality?",
                     time: "02:10 PM",
                     type: "received"
                 },
                 {
                     sender: "You",
-                    avatar: "imge/hussein.png",
+                    avatar: "img/hussein.png",
                     text: "Have you considered creating online courses or group sessions? That could help you reach more students with the same time investment.",
                     time: "02:15 PM",
                     type: "sent"
                 },
                 {
                     sender: "Robert Kim",
-                    avatar: "imge/jazeal.png",
+                    avatar: "img/jazeal.png",
                     text: "Partnering with local schools could be another avenue. Many schools are looking for after-school tutoring programs.",
                     time: "02:20 PM",
                     type: "received"
@@ -1245,21 +1458,21 @@
             resources: [
                 {
                     sender: "Emma Wilson",
-                    avatar: "imge/good .png",
+                    avatar: "img/good .png",
                     text: "Does anyone know if the university offers grants for student startups?",
                     time: "03:45 PM",
                     type: "received"
                 },
                 {
                     sender: "You",
-                    avatar: "imge/hussein.png",
+                    avatar: "img/hussein.png",
                     text: "Yes! The Innovation Fund provides up to $5,000 for promising student ventures. The deadline for applications is next month.",
                     time: "03:50 PM",
                     type: "sent"
                 },
                 {
                     sender: "James Miller",
-                    avatar: "imge/jazeal.png",
+                    avatar: "img/jazeal.png",
                     text: "The business library also has a dedicated section for entrepreneurship with some really helpful books and resources.",
                     time: "03:55 PM",
                     type: "received"
@@ -1323,6 +1536,33 @@
                     // Load the channel messages
                     const channelId = this.getAttribute('data-channel');
                     loadChannel(channelId);
+                });
+            });
+
+            // People tab switching
+            const sidebarTabs = document.querySelectorAll('.sidebar-tab');
+            sidebarTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    sidebarTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.querySelector('.channels').classList.remove('active');
+                    document.querySelector('.people').classList.remove('active');
+                    document.querySelector(`.${tabId}`).classList.add('active');
+                });
+            });
+
+            // Person selection
+            const personItems = document.querySelectorAll('.person-item');
+            personItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // In a real app, this would open a direct message conversation
+                    const personName = this.querySelector('h4').textContent;
+                    alert(`Opening direct message with ${personName}. In a real app, this would switch to a private chat.`);
                 });
             });
 

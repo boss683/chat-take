@@ -178,6 +178,7 @@
             display: none;
             z-index: 1000;
             list-style: none;
+            padding: 8px 0;
         }
 
         .dropdown-menu li a {
@@ -185,6 +186,8 @@
             padding: 8px 14px;
             color: #374151;
             font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .dropdown-menu li a:hover {
@@ -194,6 +197,17 @@
 
         .dropdown:hover .dropdown-menu {
             display: block;
+        }
+
+        /* Mobile dropdown handling */
+        @media (max-width: 768px) {
+            .dropdown.active .dropdown-menu {
+                display: block;
+                position: static;
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+            }
         }
 
         /* ____ Overlay ____ */
@@ -1068,28 +1082,29 @@
         </div>
         
         <ul class="nav-links">
-            <li><a href="#" class="nav-link">Home</a></li>
-            <li><a href="#" class="nav-link">About</a></li>
-            <li><a href="./chat.html" class="nav-link">chat</a></li>
-            <li><a href="#" class="nav-link">stories</a></li>
-            <li><a href="#" class="nav-link">porgrams</a></li>
-            <li><a href="#" class="nav-link">Support</a></li>
+            <li><a href="#" class="nav-link" data-translate="home">Home</a></li>
+            <li><a href="#" class="nav-link" data-translate="about">About</a></li>
+            <li><a href="./chat.html" class="nav-link" data-translate="chat">Chat</a></li>
+            <li><a href="#" class="nav-link" data-translate="stories">Stories</a></li>
+            <li><a href="#" class="nav-link" data-translate="programs">Programs</a></li>
+            <li><a href="#" class="nav-link" data-translate="support">Support</a></li>
             
-            <li class="dropdown">
-                <a href="#" class="nav-link">Langauages <i class="fas fa-chevron-down"></i></a>
+            <li class="dropdown" id="language-dropdown">
+                <a href="#" class="nav-link" data-translate="languages">Languages <i class="fas fa-chevron-down"></i></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">English</a></li>
-                    <li><a href="#">Arabic</a></li>
-            <li><a href="#" class="nav-link">Swahili</a></li>
-            <li><a href="#" class="nav-link"> French</a></li>
+                    <li><a href="#" data-lang="en">English</a></li>
+                    <li><a href="#" data-lang="ar">Arabic</a></li>
+                    <li><a href="#" data-lang="sw">Swahili</a></li>
+                    <li><a href="#" data-lang="fr">French</a></li>
+                    <li><a href="#" data-lang="rw">Kinyarwanda</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="nav-link">Resources</a></li>
-            <li><a href="#" class="nav-link">Contact</a></li>
-            <li><a href="#" class="login-btn">Login</a></li>
-            <li><a href="#" class="donate-btn">Donate</a></li>
+            <li><a href="#" class="nav-link" data-translate="resources">Resources</a></li>
+            <li><a href="#" class="nav-link" data-translate="contact">Contact</a></li>
+            <li><a href="#" class="login-btn" data-translate="login">Login</a></li>
+            <li><a href="#" class="donate-btn" data-translate="donate">Donate</a></li>
             <li class="nav-search">
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Search..." data-translate="search">
             </li>
         </ul>
         
@@ -1102,8 +1117,8 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-header">
-                     <h2>let us Chat</h2>
-                    <p>Connect with fellow entrepreneurs</p> 
+                     <h2 data-translate="chatTitle">Let's Chat</h2>
+                    <p data-translate="chatSubtitle">Connect with fellow entrepreneurs</p> 
                 </div>
                 
                 <div class="user-profile">
@@ -1111,30 +1126,30 @@
                         <img src="img/girl.png" alt="User Avatar">
                     </div>
                     <div class="user-info">
-                        <h3>Maya Johnson</h3>
-                        <p>Founder of EcoPack</p>
+                        <h3 data-translate="userName">Maya Johnson</h3>
+                        <p data-translate="userRole">Founder of EcoPack</p>
                         <div class="online-status">
                             <div class="status-dot"></div>
-                            <span>Online</span>
+                            <span data-translate="onlineStatus">Online</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="sidebar-tabs">
-                    <div class="sidebar-tab active" data-tab="channels">Channels</div>
-                    <div class="sidebar-tab" data-tab="people">People</div>
+                    <div class="sidebar-tab active" data-tab="channels" data-translate="channelsTab">Channels</div>
+                    <div class="sidebar-tab" data-tab="people" data-translate="peopleTab">People</div>
                 </div>
                 
                 <div class="channels active">
-                    <h3><i class="fas fa-hashtag"></i> Discussion Channels</h3>
+                    <h3><i class="fas fa-hashtag"></i> <span data-translate="channelsTitle">Discussion Channels</span></h3>
                     <ul class="channel-list">
                         <li class="channel-item active" data-channel="ideas">
                             <div class="channel-icon">
                                 <i class="fas fa-lightbulb"></i>
                             </div>
                             <div class="channel-info">
-                                <h4>Ideas & Brainstorming</h4>
-                                <p>23 members</p>
+                                <h4 data-translate="ideasChannel">Ideas & Brainstorming</h4>
+                                <p data-translate="members23">23 members</p>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="support">
@@ -1142,8 +1157,8 @@
                                 <i class="fas fa-question-circle"></i>
                             </div>
                             <div class="channel-info">
-                                <h4>Q&A Support</h4>
-                                <p>45 members</p>
+                                <h4 data-translate="supportChannel">Q&A Support</h4>
+                                <p data-translate="members45">45 members</p>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="partnerships">
@@ -1151,8 +1166,8 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <div class="channel-info">
-                                <h4>Partnerships</h4>
-                                <p>18 members</p>
+                                <h4 data-translate="partnershipsChannel">Partnerships</h4>
+                                <p data-translate="members18">18 members</p>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="growth">
@@ -1160,8 +1175,8 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="channel-info">
-                                <h4>Growth Strategies</h4>
-                                <p>32 members</p>
+                                <h4 data-translate="growthChannel">Growth Strategies</h4>
+                                <p data-translate="members32">32 members</p>
                             </div>
                         </li>
                         <li class="channel-item" data-channel="resources">
@@ -1169,15 +1184,15 @@
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <div class="channel-info">
-                                <h4>Student Resources</h4>
-                                <p>56 members</p>
+                                <h4 data-translate="resourcesChannel">Student Resources</h4>
+                                <p data-translate="members56">56 members</p>
                             </div>
                         </li>
                     </ul>
                 </div>
                 
                 <div class="people">
-                    <h3><i class="fas fa-users"></i> Community Members</h3>
+                    <h3><i class="fas fa-users"></i> <span data-translate="peopleTitle">Community Members</span></h3>
                     <ul class="people-list">
                         <li class="person-item" data-person="alex">
                             <div class="person-avatar">
@@ -1185,10 +1200,10 @@
                             </div>
                             <div class="person-info">
                                 <h4>Alex Johnson</h4>
-                                <p>Product Designer</p>
+                                <p data-translate="productDesigner">Product Designer</p>
                                 <div class="person-status">
                                     <div class="person-status-dot online"></div>
-                                    <span>Online</span>
+                                    <span data-translate="onlineStatus">Online</span>
                                 </div>
                             </div>
                         </li>
@@ -1198,10 +1213,10 @@
                             </div>
                             <div class="person-info">
                                 <h4>Samira Khan</h4>             
-                                <p>Marketing Specialist</p>
+                                <p data-translate="marketingSpecialist">Marketing Specialist</p>
                                 <div class="person-status">
                                     <div class="person-status-dot online"></div>
-                                    <span>Online</span>
+                                    <span data-translate="onlineStatus">Online</span>
                                 </div>
                             </div>
                         </li>
@@ -1211,10 +1226,10 @@
                             </div>
                             <div class="person-info">
                                 <h4 style="color: #071a42;">Tyler Park</h4>
-                                <p>Finance Advisor</p>
+                                <p data-translate="financeAdvisor">Finance Advisor</p>
                                 <div class="person-status">
                                     <div class="person-status-dot busy"></div>
-                                    <span>Busy</span>
+                                    <span data-translate="busyStatus">Busy</span>
                                 </div>
                             </div>
                         </li>
@@ -1224,10 +1239,10 @@
                             </div>
                             <div class="person-info">
                                 <h4>Maria Rodriguez</h4>
-                                <p>Software Developer</p>
+                                <p data-translate="softwareDeveloper">Software Developer</p>
                                 <div class="person-status">
                                     <div class="person-status-dot offline"></div>
-                                    <span>Offline</span>
+                                    <span data-translate="offlineStatus">Offline</span>
                                 </div>
                             </div>
                         </li>
@@ -1237,10 +1252,10 @@
                             </div>
                             <div class="person-info">
                                 <h4>David Chen</h4>
-                                <p>UX Researcher</p>
+                                <p data-translate="uxResearcher">UX Researcher</p>
                                 <div class="person-status">
                                     <div class="person-status-dot online"></div>
-                                    <span>Online</span>
+                                    <span data-translate="onlineStatus">Online</span>
                                 </div>
                             </div>
                         </li>
@@ -1253,7 +1268,7 @@
                 <div class="chat-header">
                     <div class="chat-title">
                         <h2 id="channel-title">#ideas-and-brainstorming</h2>
-                        <p id="channel-description">Share and discuss business ideas with the community</p>
+                        <p id="channel-description" data-translate="ideasDescription">Share and discuss business ideas with the community</p>
                     </div>
                     <div class="chat-actions">
                         <!-- <a href="/index.html" class="home-btn">Home</a> -->
@@ -1267,7 +1282,7 @@
                 </div>
                 
                 <div class="message-input">
-                    <input type="text" id="message-input" placeholder="Type your message here...">
+                    <input type="text" id="message-input" placeholder="Type your message here..." data-translate="messagePlaceholder">
                     <button class="send-button" id="send-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -1280,12 +1295,12 @@
     <div class="search-modal" id="search-modal">
         <div class="search-modal-content">
             <div class="search-modal-header">
-                <h3>Search Messages</h3>
+                <h3 data-translate="searchMessages">Search Messages</h3>
                 <button class="search-modal-close" id="search-modal-close">&times;</button>
             </div>
-            <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Type to search messages...">
+            <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Type to search messages..." data-translate="searchPlaceholder">
             <div class="search-results" id="search-results">
-                <div class="no-results">Enter a search term to find messages</div>
+                <div class="no-results" data-translate="enterSearchTerm">Enter a search term to find messages</div>
             </div>
         </div>
     </div>
@@ -1297,9 +1312,9 @@
                 <div class="footer-about">
                     <div class="logo-section">
                         <img src="./img/Girls Space (1) (1) (2).png" alt="Logo">
-                        <p class="logo-subtitle">Empowering Students, Building Futures</p>
+                        <p class="logo-subtitle" data-translate="empoweringStudents">Empowering Students, Building Futures</p>
                     </div>
-                    <p class="about-text">
+                    <p class="about-text" data-translate="footerDescription">
                         A platform for student entrepreneurs to connect, collaborate, and grow their business ideas.
                     </p>
                     <div class="social-links">
@@ -1311,35 +1326,332 @@
                 </div>
 
                 <div>
-                    <h4 class="links-title">Quick Links</h4>
+                    <h4 class="links-title" data-translate="quickLinks">Quick Links</h4>
                     <ul class="links-list">
-                        <li class="link-item"><a href="#">Join Chat</a></li>
-                        <li class="link-item"><a href="#">Share Story</a></li>
-                        <li class="link-item"><a href="#">Programs</a></li>
+                        <li class="link-item"><a href="#" data-translate="joinChat">Join Chat</a></li>
+                        <li class="link-item"><a href="#" data-translate="shareStory">Share Story</a></li>
+                        <li class="link-item"><a href="#" data-translate="programs">Programs</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="links-title">Get Help</h4>
+                    <h4 class="links-title" data-translate="getHelp">Get Help</h4>
                     <ul class="links-list">
-                        <li class="link-item"><a href="#">Emergency</a></li>
-                        <li class="link-item"><a href="#">Support</a></li>
-                        <li class="link-item"><a href="#">Report</a></li>
+                        <li class="link-item"><a href="#" data-translate="emergency">Emergency</a></li>
+                        <li class="link-item"><a href="#" data-translate="support">Support</a></li>
+                        <li class="link-item"><a href="#" data-translate="report">Report</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>© 2025/11/11 Student Business Chat. <span style="color:#d1d5db;">Empowering entrepreneurs, always.</span></p>
+                <p data-translate="copyright">© 2025/11/11 Student Business Chat. <span style="color:#d1d5db;" data-translate="empoweringAlways">Empowering entrepreneurs, always.</span></p>
                 <div class="footer-info">
-                    <p>Available in: English, Français, Español, العربية</p>
-                    <p>Supported by Student Entrepreneurship Network</p>
+                    <p data-translate="availableLanguages">Available in: English, Français, Español, العربية</p>
+                    <p data-translate="supportedBy">Supported by Student Entrepreneurship Network</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
+        // Translation data
+        const translations = {
+            en: {
+                home: "Home",
+                about: "About",
+                chat: "Chat",
+                stories: "Stories",
+                programs: "Programs",
+                support: "Support",
+                languages: "Languages",
+                resources: "Resources",
+                contact: "Contact",
+                login: "Login",
+                donate: "Donate",
+                search: "Search...",
+                chatTitle: "Let's Chat",
+                chatSubtitle: "Connect with fellow entrepreneurs",
+                userName: "Maya Johnson",
+                userRole: "Founder of EcoPack",
+                onlineStatus: "Online",
+                channelsTab: "Channels",
+                peopleTab: "People",
+                channelsTitle: "Discussion Channels",
+                ideasChannel: "Ideas & Brainstorming",
+                supportChannel: "Q&A Support",
+                partnershipsChannel: "Partnerships",
+                growthChannel: "Growth Strategies",
+                resourcesChannel: "Student Resources",
+                members23: "23 members",
+                members45: "45 members",
+                members18: "18 members",
+                members32: "32 members",
+                members56: "56 members",
+                peopleTitle: "Community Members",
+                productDesigner: "Product Designer",
+                marketingSpecialist: "Marketing Specialist",
+                financeAdvisor: "Finance Advisor",
+                softwareDeveloper: "Software Developer",
+                uxResearcher: "UX Researcher",
+                busyStatus: "Busy",
+                offlineStatus: "Offline",
+                ideasDescription: "Share and discuss business ideas with the community",
+                messagePlaceholder: "Type your message here...",
+                searchMessages: "Search Messages",
+                searchPlaceholder: "Type to search messages...",
+                enterSearchTerm: "Enter a search term to find messages",
+                noResults: "No messages found matching your search",
+                empoweringStudents: "Empowering Students, Building Futures",
+                footerDescription: "A platform for student entrepreneurs to connect, collaborate, and grow their business ideas.",
+                quickLinks: "Quick Links",
+                joinChat: "Join Chat",
+                shareStory: "Share Story",
+                getHelp: "Get Help",
+                emergency: "Emergency",
+                report: "Report",
+                copyright: "© 2025/11/11 Student Business Chat.",
+                empoweringAlways: "Empowering entrepreneurs, always.",
+                availableLanguages: "Available in: English, Français, Español, العربية",
+                supportedBy: "Supported by Student Entrepreneurship Network"
+            },
+            ar: {
+                home: "الصفحة الرئيسية",
+                about: "حول",
+                chat: "الدردشة",
+                stories: "القصص",
+                programs: "البرامج",
+                support: "الدعم",
+                languages: "اللغات",
+                resources: "الموارد",
+                contact: "اتصل بنا",
+                login: "تسجيل الدخول",
+                donate: "تبرع",
+                search: "بحث...",
+                chatTitle: "لنتحدث",
+                chatSubtitle: "تواصل مع رواد الأعمال الآخرين",
+                userName: "مايا جونسون",
+                userRole: "مؤسس EcoPack",
+                onlineStatus: "متصل",
+                channelsTab: "القنوات",
+                peopleTab: "الأشخاص",
+                channelsTitle: "قنوات النقاش",
+                ideasChannel: "الأفكار والعصف الذهني",
+                supportChannel: "الدعم والأسئلة",
+                partnershipsChannel: "الشراكات",
+                growthChannel: "استراتيجيات النمو",
+                resourcesChannel: "موارد الطلاب",
+                members23: "23 عضوًا",
+                members45: "45 عضوًا",
+                members18: "18 عضوًا",
+                members32: "32 عضوًا",
+                members56: "56 عضوًا",
+                peopleTitle: "أعضاء المجتمع",
+                productDesigner: "مصمم منتج",
+                marketingSpecialist: "أخصائي تسويق",
+                financeAdvisor: "مستشار مالي",
+                softwareDeveloper: "مطور برمجيات",
+                uxResearcher: "باحث تجربة المستخدم",
+                busyStatus: "مشغول",
+                offlineStatus: "غير متصل",
+                ideasDescription: "شارك وناقش أفكار الأعمال مع المجتمع",
+                messagePlaceholder: "اكتب رسالتك هنا...",
+                searchMessages: "البحث في الرسائل",
+                searchPlaceholder: "اكتب للبحث في الرسائل...",
+                enterSearchTerm: "أدخل مصطلح البحث للعثور على الرسائل",
+                noResults: "لم يتم العثور على رسائل تطابق بحثك",
+                empoweringStudents: "تمكين الطلاب، بناء المستقبل",
+                footerDescription: "منصة لرواد الأعمال الطلاب للتواصل والتعاون وتنمية أفكار أعمالهم.",
+                quickLinks: "روابط سريعة",
+                joinChat: "انضم للدردشة",
+                shareStory: "شارك قصة",
+                getHelp: "احصل على المساعدة",
+                emergency: "طوارئ",
+                report: "الإبلاغ",
+                copyright: "© 2025/11/11 دردشة الأعمال الطلابية.",
+                empoweringAlways: "تمكين رواد الأعمال، دائماً.",
+                availableLanguages: "متوفر بـ: الإنجليزية، الفرنسية، الإسبانية، العربية",
+                supportedBy: "بدعم من شبكة ريادة الأعمال الطلابية"
+            },
+            sw: {
+                home: "Nyumbani",
+                about: "Kuhusu",
+                chat: "Gumzo",
+                stories: "Hadithi",
+                programs: "Mipango",
+                support: "Usaidizi",
+                languages: "Lugha",
+                resources: "Rasilimali",
+                contact: "Wasiliana",
+                login: "Ingia",
+                donate: "Changia",
+                search: "Tafuta...",
+                chatTitle: "Tuzungumze",
+                chatSubtitle: "Wasiliana na wafanyabiashara wenzako",
+                userName: "Maya Johnson",
+                userRole: "Mwanzilishi wa EcoPack",
+                onlineStatus: "Mtandaoni",
+                channelsTab: "Vituo",
+                peopleTab: "Watu",
+                channelsTitle: "Vituo vya Majadiliano",
+                ideasChannel: "Mawazo na Uundaji",
+                supportChannel: "Maswali na Majibu",
+                partnershipsChannel: "Ushirikiano",
+                growthChannel: "Mikakati ya Ukuaji",
+                resourcesChannel: "Rasilimali za Wanafunzi",
+                members23: "Wanachama 23",
+                members45: "Wanachama 45",
+                members18: "Wanachama 18",
+                members32: "Wanachama 32",
+                members56: "Wanachama 56",
+                peopleTitle: "Wanachama wa Jamii",
+                productDesigner: "Mbuni wa Bidhaa",
+                marketingSpecialist: "Mtaalamu wa Uuzaji",
+                financeAdvisor: "Mshauri wa Fedha",
+                softwareDeveloper: "Mtaalamu wa Programu",
+                uxResearcher: "Mtafiti wa UX",
+                busyStatus: "Zabibu",
+                offlineStatus: "Nje ya Mtandao",
+                ideasDescription: "Shiriki na jadili mawazo ya biashara na jamii",
+                messagePlaceholder: "Andika ujumbe wako hapa...",
+                searchMessages: "Tafuta Ujumbe",
+                searchPlaceholder: "Andika kutafuta ujumbe...",
+                enterSearchTerm: "Weka neno la kutafuta ili kupata ujumbe",
+                noResults: "Hakuna ujumbe uliopatikana unaolingana na utafutaji wako",
+                empoweringStudents: "Kuwawezesha Wanafunzi, Kujenga Mustakabali",
+                footerDescription: "Jukwaa kwa wafanyabiashara wanafunzi kuwasiliana, kushirikiana, na kukuza mawazo yao ya biashara.",
+                quickLinks: "Viungo vya Haraka",
+                joinChat: "Jiunge na Mazungumzo",
+                shareStory: "Shiriki Hadithi",
+                getHelp: "Pata Usaidizi",
+                emergency: "Dharura",
+                report: "Ripoti",
+                copyright: "© 2025/11/11 Mazungumzo ya Biashara ya Wanafunzi.",
+                empoweringAlways: "Kuwawezesha wafanyabiashara, kila wakati.",
+                availableLanguages: "Inapatikana katika: Kiingereza, Kifaransa, Kihispania, Kiarabu",
+                supportedBy: "Inasaidiwa na Mtandao wa Ujasiriamali wa Wanafunzi"
+            },
+            fr: {
+                home: "Accueil",
+                about: "À propos",
+                chat: "Chat",
+                stories: "Histoires",
+                programs: "Programmes",
+                support: "Soutien",
+                languages: "Langues",
+                resources: "Ressources",
+                contact: "Contact",
+                login: "Connexion",
+                donate: "Faire un don",
+                search: "Rechercher...",
+                chatTitle: "Discutons",
+                chatSubtitle: "Connectez-vous avec d'autres entrepreneurs",
+                userName: "Maya Johnson",
+                userRole: "Fondatrice d'EcoPack",
+                onlineStatus: "En ligne",
+                channelsTab: "Canaux",
+                peopleTab: "Personnes",
+                channelsTitle: "Canaux de discussion",
+                ideasChannel: "Idées et brainstorming",
+                supportChannel: "Questions et réponses",
+                partnershipsChannel: "Partenariats",
+                growthChannel: "Stratégies de croissance",
+                resourcesChannel: "Ressources étudiantes",
+                members23: "23 membres",
+                members45: "45 membres",
+                members18: "18 membres",
+                members32: "32 membres",
+                members56: "56 membres",
+                peopleTitle: "Membres de la communauté",
+                productDesigner: "Designer de produit",
+                marketingSpecialist: "Spécialiste du marketing",
+                financeAdvisor: "Conseiller financier",
+                softwareDeveloper: "Développeur de logiciels",
+                uxResearcher: "Chercheur UX",
+                busyStatus: "Occupé",
+                offlineStatus: "Hors ligne",
+                ideasDescription: "Partagez et discutez des idées d'entreprise avec la communauté",
+                messagePlaceholder: "Tapez votre message ici...",
+                searchMessages: "Rechercher des messages",
+                searchPlaceholder: "Tapez pour rechercher des messages...",
+                enterSearchTerm: "Entrez un terme de recherche pour trouver des messages",
+                noResults: "Aucun message trouvé correspondant à votre recherche",
+                empoweringStudents: "Autonomiser les étudiants, construire l'avenir",
+                footerDescription: "Une plateforme pour les entrepreneurs étudiants pour se connecter, collaborer et développer leurs idées d'entreprise.",
+                quickLinks: "Liens rapides",
+                joinChat: "Rejoindre le chat",
+                shareStory: "Partager une histoire",
+                getHelp: "Obtenir de l'aide",
+                emergency: "Urgence",
+                report: "Signaler",
+                copyright: "© 2025/11/11 Chat d'Affaires Étudiant.",
+                empoweringAlways: "Autonomiser les entrepreneurs, toujours.",
+                availableLanguages: "Disponible en : Anglais, Français, Espagnol, Arabe",
+                supportedBy: "Soutenu par le Réseau d'Entrepreneuriat Étudiant"
+            },
+            rw: {
+                home: "Ahabanza",
+                about: "Abo",
+                chat: "Kuganira",
+                stories: "Inkuru",
+                programs: "Porogaramu",
+                support: "Gushigikira",
+                languages: "Indimi",
+                resources: "Ibikoresho",
+                contact: "Twandikire",
+                login: "Injira",
+                donate: "Tanga",
+                search: "Shakisha...",
+                chatTitle: "Reka Tuvugane",
+                chatSubtitle: "Huza n'abandi ba rwiyemezamirimo",
+                userName: "Maya Johnson",
+                userRole: "Ushinzwe EcoPack",
+                onlineStatus: "Kumurongo",
+                channelsTab: "Ibyumba",
+                peopleTab: "Abantu",
+                channelsTitle: "Ibyumba byo Kuganira",
+                ideasChannel: "Ibitekerezo n'Ibitekerezo",
+                supportChannel: "Ubufasha n'Ibibazo",
+                partnershipsChannel: "Ubusabane",
+                growthChannel: "Ingamba zo Gukura",
+                resourcesChannel: "Ibikoresho by'Abanyeshuri",
+                members23: "Abanyamuryango 23",
+                members45: "Abanyamuryango 45",
+                members18: "Abanyamuryango 18",
+                members32: "Abanyamuryango 32",
+                members56: "Abanyamuryango 56",
+                peopleTitle: "Abanyamuryango b'Umuryango",
+                productDesigner: "Umwubatsi w'ibicuruzwa",
+                marketingSpecialist: "Inzobere mu gukwirakwiza",
+                financeAdvisor: "Umucyo w'imari",
+                softwareDeveloper: "Umwubatsi wa porogaramu",
+                uxResearcher: "Umwiga wa UX",
+                busyStatus: "Birakorwa",
+                offlineStatus: "Ntaho",
+                ideasDescription: "Sangira kandi ujye ugenerwa n'ibitekerezo by'ubucuruzi na komite",
+                messagePlaceholder: "Andika ubutumwa bwawe hano...",
+                searchMessages: "Shakisha Ubutumwa",
+                searchPlaceholder: "Andika gushakisha ubutumwa...",
+                enterSearchTerm: "Shyiramo ijambo ry'ishakishwa kugirango ushake ubutumwa",
+                noResults: "Nta butumwa bwabonetse buhuye n'ishakishwa ryawe",
+                empoweringStudents: "Guharanira Abanyeshuri, Kubaka Ejo Hazaza",
+                footerDescription: "Uru ruhame rw'abanyeshuri ba rwiyemezamirimo rwo guhuza, gukorana, no gukura ibitekerezo byabo by'ubucuruzi.",
+                quickLinks: "Ihuza vya Vuba",
+                joinChat: "Injira mu Kuganira",
+                shareStory: "Sangira Inkuru",
+                getHelp: "Shaka Ubufasha",
+                emergency: "Gihutirwa",
+                report: "Raporo",
+                copyright: "© 2025/11/11 Kuganira k'Ubucuruzi bw'Abanyeshuri.",
+                empoweringAlways: "Guharanira abarwiyemezamirimo, buri gihe.",
+                availableLanguages: "Biboneka mu: Icyongereza, Igifaransa, Icyesipanyoli, Icyarabu",
+                supportedBy: "Byashyigikiwe na Umuryango w'Ubwiyemezi bw'Abanyeshuri"
+            }
+        };
+
+        // Current language
+        let currentLang = 'en';
+
         // Chat data for different channels
         const chatData = {
             ideas: [
@@ -1498,6 +1810,7 @@
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
+            const languageDropdown = document.getElementById('language-dropdown');
             
             hamburger.addEventListener('click', function() {
                 hamburger.classList.toggle('active');
@@ -1518,9 +1831,48 @@
                     dropdowns.forEach(dropdown => {
                         dropdown.style.display = 'none';
                     });
+                    
+                    // Remove active class from dropdowns
+                    const dropdownParents = document.querySelectorAll('.dropdown');
+                    dropdownParents.forEach(parent => {
+                        parent.classList.remove('active');
+                    });
                 }
             });
 
+            // Handle dropdown on mobile
+            if (languageDropdown) {
+                languageDropdown.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            }
+
+            // Language switching functionality
+            const languageLinks = document.querySelectorAll('.dropdown-menu a[data-lang]');
+            languageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                    
+                    // Close dropdown after selection
+                    const dropdown = this.closest('.dropdown-menu');
+                    dropdown.style.display = 'none';
+                    
+                    // Remove active class from dropdown parent
+                    const dropdownParent = this.closest('.dropdown');
+                    if (dropdownParent) {
+                        dropdownParent.classList.remove('active');
+                    }
+                });
+            });
+
+            // Initialize with English
+            changeLanguage('en');
+            
             // Initialize chat with default channel
             loadChannel('ideas');
             
@@ -1587,7 +1939,7 @@
                 const searchTerm = this.value.toLowerCase().trim();
                 
                 if (searchTerm === '') {
-                    searchResults.innerHTML = '<div class="no-results">Enter a search term to find messages</div>';
+                    searchResults.innerHTML = '<div class="no-results" data-translate="enterSearchTerm">Enter a search term to find messages</div>';
                     return;
                 }
                 
@@ -1599,7 +1951,7 @@
                 
                 // Display search results
                 if (filteredMessages.length === 0) {
-                    searchResults.innerHTML = '<div class="no-results">No messages found matching your search</div>';
+                    searchResults.innerHTML = '<div class="no-results" data-translate="noResults">No messages found matching your search</div>';
                 } else {
                     searchResults.innerHTML = '';
                     filteredMessages.forEach(message => {
@@ -1691,13 +2043,51 @@
             });
         });
 
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update all elements with data-translate attribute
+            const translatableElements = document.querySelectorAll('[data-translate]');
+            translatableElements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                    
+                    // Update placeholder for search input
+                    if (element.tagName === 'INPUT' && element.getAttribute('placeholder')) {
+                        element.setAttribute('placeholder', translations[lang][key]);
+                    }
+                }
+            });
+            
+            // Update the language dropdown text
+            const languageLink = document.querySelector('#language-dropdown > a');
+            if (languageLink && translations[lang] && translations[lang]['languages']) {
+                languageLink.textContent = translations[lang]['languages'];
+            }
+            
+            // Update channel descriptions
+            const channelDescriptionElements = {
+                ideas: document.getElementById('channel-description'),
+                support: document.querySelector('[data-channel="support"] .channel-info p'),
+                partnerships: document.querySelector('[data-channel="partnerships"] .channel-info p'),
+                growth: document.querySelector('[data-channel="growth"] .channel-info p'),
+                resources: document.querySelector('[data-channel="resources"] .channel-info p')
+            };
+            
+            // Update channel descriptions based on current language
+            if (channelDescriptionElements.ideas && translations[lang] && translations[lang]['ideasDescription']) {
+                channelDescriptionElements.ideas.textContent = translations[lang]['ideasDescription'];
+            }
+        }
+
         // Function to load a channel
         function loadChannel(channelId) {
             currentChannel = channelId;
             
             // Update channel title and description
             document.getElementById('channel-title').textContent = `#${channelId}`;
-            document.getElementById('channel-description').textContent = channelDescriptions[channelId] || "Channel description";
             
             // Clear current messages
             const messagesContainer = document.getElementById('messages-container');
